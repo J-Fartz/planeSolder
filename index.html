@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking to the CSS file -->
+</head>
+<body>
+    <div class="logo"> 
+        <img src="/United-Airlines-Logo.png" alt="">
+    </div>
+
+    <div class="center">
+        <h1>United Airlines to Soldering Iron Converter</h1>
+        <button onclick="fetchFlights()">Check Flight Prices</button>
+        <h2 id="lastChecked">Last Date Range Queried For MCO > EWR: <span id="lastCheckedDate"></span></h2>
+        <h2 id="lastPrice">Average Price: $<span id="lastCheckedPrice"></span></h2>       
+    </div>
+
+    <div class="pricing">
+        <h3 id="flightCoutner">
+            <span id="flightCounterDisplay">0</span> Flights Counted: 
+        </h3>
+
+        <h3>
+            Click Button Below to Add Flights!
+        </h3>
+        <button onclick="flightCounter()"> Add A Flight</button>
+        <h3>
+            <span id="solders"></span>
+        </h3>
+    </div>
+
+
+    <div class="table">
+        <ul class="list1" id="flightOutput"></ul>
+    </div>
+    
+    
+    <script src="script.js" defer></script>
+</body>
+</html>

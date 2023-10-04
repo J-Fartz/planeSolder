@@ -1,0 +1,77 @@
+body {
+    background-color: navy;
+    font-family: Arial, sans-serif; /* Added to ensure consistent font */
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    color:orangered
+    
+}
+
+img{
+    width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -10%;
+    margin-top: -10%;
+    
+}
+
+p {
+    color: white;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f8a72a; /* This is just a sample color, you can adjust it */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px; /* Makes the button edges rounded */
+    margin-bottom: 20px; /* Adds a little space beneath the button */
+}
+
+.center {
+    text-align: center;
+}
+
+
+
+.list1 {
+    color: white;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row; /* set direction to row */
+    flex-wrap: wrap; /* allow the items to wrap to the next line */
+    align-items: center;
+    justify-content: center; /* center items horizontally */
+    width: 100%;
+}
+
+.list1 li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+    border: 1px solid white;
+    width: 50%; /* for two columns. If you want 3 columns, change to 33.33% */
+    box-sizing: border-box; /* makes sure padding and border are included in the width */
+}
+
+.list1 li div {
+    flex: 1;
+    text-align: center;
+}
+
+.pricing {
+    text-align: center;
+    color:aliceblue;
+}

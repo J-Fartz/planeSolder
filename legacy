@@ -1,0 +1,89 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const storedData = localStorage.getItem('flightData');
+    if (storedData) {
+        const flights = JSON.parse(storedData);
+        displayFlights(flights);
+    }
+});
+
+
+
+function getFiveDaysAheadDate() {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 5); // Add 5 days to the current date
+
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month starts at 0
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
+const dateForFlight = getFiveDaysAheadDate();
+
+const url = `https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights?sourceAirportCode=MCO&destinationAirportCode=EWR&date=${dateForFlight}&itineraryType=ONE_WAY&sortOrder=EARLIEST_OUTBOUND_DEPARTURE&numAdults=1&numSeniors=0&classOfService=PREMIUM_ECONOMY&pageNumber=1&nonstop=yes&currencyCode=USD`;
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '381d501ab8msh095b75e28d7b179p1b99ebjsn170c7090cc56',
+		'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
+	}
+};
+async function fetchFlights() {
+    try {
+        const response = await fetch(url, options);
+        const fresults = await response.json();
+        console.log(fresults); // This will help you understand the fetched data's structure
+
+        if (fresults.status === false) {
+            throw new Error(fresults.message);
+        }
+
+
+        const flights = fresults.data.flights;
+
+        let output = ''; // Store the output string
+        
+        flights.forEach((flight, flightIndex) => {
+            const purchaseLink = flight.purchaseLinks[0];
+            if (purchaseLink && purchaseLink.totalPrice) {
+                const provider = purchaseLink.providerId;
+                const price = purchaseLink.totalPrice;
+                output += `Flight ${flightIndex + 1}, Provider: ${provider}, Total Price: $${price}\n`;
+            }
+        });
+        
+        // Display the output
+        const outputElement = document.getElementById('flightOutput');
+        outputElement.textContent = output;
+        
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function addFlight() {
+    fetchFlights();
+}
+
+// To-Do later:
+let counter = 0;
+const solderPrice = 64.78;
+let unitedFlightPrice = 383.64; // TODO: Update with daily Math.floor of API results
+
+function flightCounter() {
+    counter++;
+    updateContent(); // Update the content every time a flight is added
+}
+let date = Date();
+let history = [];
+
+
+function updateContent() {
+    let solderCount = Math.floor((counter * unitedFlightPrice) / solderPrice);
+    document.getElementById('solders').innerHTML = `The amount of soldering irons PWS NY could have bought was: ${solderCount}`;
+    history.push(Date);
+}
+
